@@ -1,1 +1,7 @@
+# Ignore task file
+tasks.txt
+
+# Bytecode and cache
+__pycache__/
+*.pyc
 
