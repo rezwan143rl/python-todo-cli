@@ -7,6 +7,7 @@ A simple command-line to-do list application built using basic Python concepts l
 ## 📌 Features
 
 - Add a new task
+- delete a task (updated)
 - View all tasks
 - Mark tasks as completed
 
@@ -17,7 +18,7 @@ A simple command-line to-do list application built using basic Python concepts l
 1. Make sure you have Python installed (Python 3.x).
 2. Run the script:
 
-```bash
+
 python todo.py
 Follow the prompts:
 
