@@ -37,7 +37,7 @@ Completed tasks get a (completed) tag
 📈 What's Next
 This is a beginner version. I'm planning to:
 
- Add a delete task option
+ Add a delete task option (checked)(14.05.2025)
 
  Improve user interface
 
@@ -48,6 +48,35 @@ This is a beginner version. I'm planning to:
  Add task numbering for easier use
 
  Build a GUI or web version in the future
+
+                       ✨ Update - Functional Version(14.05.2025)
+
+The code has been refactored into a modular structure using functions, which makes it more maintainable and readable.
+
+✅ Features Added:
+add() function: Appends new tasks to the file.
+
+allDataStr() function: Reads and returns all tasks.
+
+mark_completed() function: Marks a task as complete and prevents duplicate completion.
+
+Prevents redundant marking of tasks already marked as completed.
+
+Cleaner main menu with function calls.
+
+#####Delete Task Feature#####
+
+You can now delete a task by selecting option 2.
+
+The app checks both completed and incomplete versions of the task and removes it.
+
+Example flow:
+choose:
+1.Add task
+2.Delete task
+3.Mark task as complete
+4.view all task
+
 
 👨‍💻 Author
 Made by Md. Rezwan Ahmed while learning Python!
