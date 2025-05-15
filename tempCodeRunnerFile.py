@@ -1,2 +1,0 @@
-
-      print(allDataStr(file))

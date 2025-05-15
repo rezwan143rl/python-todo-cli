@@ -77,8 +77,30 @@ choose:
 2.Delete task
 3.Mark task as complete
 4.view all task
+                                  ✨ Update - JSON Version(16.05.2025)
+## 📝 To-Do CLI App (JSON Version)
 
+This updated version of the CLI to-do list app now uses structured JSON storage instead of plain text. Each task is saved as an object with a name and completion status.
 
+### Features
+- ✅ Add a new task
+- ✅ Delete a task
+- ✅ Mark a task as completed
+- ✅ View all tasks with their status
+- ✅ JSON file (`tasks.json`) for persistent, structured storage
+
+### Example JSON Task Format
+```json
+[
+  {
+    "Name": "Finish homework",
+    "mark": false
+  },
+  {
+    "Name": "Water the plants",
+    "mark": true
+  }
+]
 👨‍💻 Author
 Made by Md. Rezwan Ahmed while learning Python!
 Feel free to suggest improvements or fork the project.

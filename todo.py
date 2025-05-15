@@ -1,39 +1,61 @@
-file="tasks.txt"
-def add(FileName,value):      #adds to a txt file
-     with open(FileName,"a")as f:
-        value="\n"+value
-        f.write(value)
-def allDataStr(FileName):     #show1s all data of a txt file
-     with open(FileName,"r")as f:
-          allRead=f.read()
-          return allRead
+import json
+import os
 
-def mark_completed(FileName,value): #marks task as completed
-     temp=allDataStr(FileName)
-     data=temp.split('\n')
-     checker =value+"(completed)"
-     for el in range(len(data)):
-          if data[el] == value and "(completed)" not in data[el]:
-               data[el]+="(completed)"
+file="tasks.json"
+if not os.path.exists(file):
+     with open(file,"w")as f:
+          json.dump([],f)
+
+def add(FileName,value):      #adds to a txt file
+     with open(FileName,"r")as f:
+          jsonstring=json.load(f)
+     newTask={
+          "Name":value,
+          "mark":False,
+          
+     }
+     jsonstring.append(newTask)
+     with open(FileName,"w")as f:
+          json.dump(jsonstring,f,indent=4)
+          
+        
+def allDataStr(FileName):     #show's all data of a txt file
+     with open(FileName,"r")as f:
+          allRead=json.load(f)
+          mark=""
+          all=""
+          for task in allRead:
+                if task["mark"]==True:
+                    mark="(completed)"
+                all+=task["Name"]+mark +"\n"
+                mark=""
+     return all
+            
+     
+
+def mark_completed(fileName,value):#marks task as completed
+    with open(fileName,"r") as f:
+          temp=json.load(f)
+    for task in temp:
+          if(task["Name"]==value):
+               task["mark"]=True
                break
-          if data[el]==checker:
-               print("Task was completed before")
-               return              
-     with open(file,"r+")as f:
-           f.truncate(0)
-           f.write('\n'.join(data))
-           print("Marked as completed")
+    with open(fileName,"w") as f:
+         json.dump(temp,f,indent=4)
+         print("Marked")
+     
 def deletion(fileName,value):
-     temp=allDataStr(fileName)
-     data=temp.split('\n')
-     checker =value+"(completed)"
-     for el in range(len(data)-1):
-          if data[el] == value or data[el] == checker:
-               data.pop(el)
-     with open(file,"r+")as f:
-           f.truncate(0)
-           f.write('\n'.join(data))
-           print("Deleted")
+    updated=[]
+    with open(fileName,"r") as f:
+        temp=json.load(f)
+    for task in temp:
+         if task["Name"]!=value:
+              updated.append(task)
+    with open(fileName,"w") as f:
+         json.dump(updated,f,indent=4)
+         print("deleted")
+    
+         
              
 
 
@@ -67,7 +89,3 @@ elif(uinput==4):
       print(allDataStr(file))
 else:
      print("wrong input")
-
-        
-
-
