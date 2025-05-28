@@ -107,9 +107,6 @@ Learning Python step by step and sharing my journey through projects!
 Feel free to suggest improvements, report issues, or fork the repo.
 
 
----
-
-Let me know if you'd like this saved as a `.md` file or pushed to GitHub—I can walk you through it step-by-step.
 
 🤖 Special Thanks
 

@@ -10,74 +10,78 @@ if not os.path.exists(file):
      with open(file,"w")as f:
           json.dump([],f)
 
-def add(FileName,value):      #adds to a txt file
-     current_time = time.strftime("%Y-%m-%d %I:%M %p",time.localtime())
-     with open(FileName,"r")as f:
-          jsonstring=json.load(f)
-          if(len(jsonstring)==0):
-               index=1
-          else:
-               index=jsonstring[-1]["Index"]+1
+class Task:
+     def __init__(self,FileName):
+          self.FileName=FileName
+          pass
+     def add(self,value):      #adds to a txt file
+          current_time = time.strftime("%Y-%m-%d %I:%M %p",time.localtime())
+          with open(self.FileName,"r")as f:
+               jsonstring=json.load(f)
+               if(len(jsonstring)==0):
+                    index=1
+               else:
+                    index=jsonstring[-1]["Index"]+1
           
-     newTask={
-          "Index":index,
-          "Name":value,
-          "mark":False,
-          "time_added":current_time,
-          "time_completed": None
+          newTask={
+               "Index":index,
+               "Name":value,
+               "mark":False,
+               "time_added":current_time,
+               "time_completed": None
           
-     }
-     jsonstring.append(newTask)
-     with open(FileName,"w")as f:
-          json.dump(jsonstring,f,indent=4)
+          }
+          jsonstring.append(newTask)
+          with open(self.FileName,"w")as f:
+               json.dump(jsonstring,f,indent=4)
           
         
-def allDataStr(FileName):     #show's all data of a txt file
-     with open(FileName,"r")as f:
-          allRead=json.load(f)
-          mark=""
-          all=""
-          for task in allRead:
-                if task["mark"]==True:
-                    mark="(completed)"
-                if(task["time_completed"]==None):
-                    all+=str(task["Index"])+" "+task["Name"]+mark +"      add time:"+task["time_added"]+"\n"
-                    mark=""
-                else:
-                     all+=str(task["Index"])+" "+task["Name"]+mark +"      add time:"+task["time_added"]+"      completion time:"+task["time_completed"]+"\n"
-                     mark=""
-     return all
-            
-     
+     def allDataStr(self):     #show's all data of a txt file
+          with open(self.FileName,"r")as f:
+               allRead=json.load(f)
+               mark=""
+               all=""
+               for task in allRead:
+                    if task["mark"]==True:
+                         mark="(completed)"
+                    if(task["time_completed"]==None):
+                         all+=str(task["Index"])+" "+task["Name"]+mark +"      add time:"+task["time_added"]+"\n"
+                         mark=""
+                    else:
+                         all+=str(task["Index"])+" "+task["Name"]+mark +"      add time:"+task["time_added"]+"      completion time:"+task["time_completed"]+"\n"
+                         mark=""
+          return all
+               
+          
 
-def mark_completed(fileName,value):#marks task as completed
-    current_time = time.strftime("%Y-%m-%d %I:%M %p",time.localtime())
-    with open(fileName,"r") as f:
-          temp=json.load(f)
-    for task in temp:
-          if(task["Index"]==int(value)):
-               task["mark"]=True
-               task["time_completed"]=current_time
-               break
-    with open(fileName,"w") as f:
-         json.dump(temp,f,indent=4)
-         print("Marked")
-def deletion(fileName,value):
-    updated=[]
-    with open(fileName,"r") as f:
-        temp=json.load(f)
-    for task in temp:
-         if task["Index"]!=int(value):
-              updated.append(task)
-              if(task["Index"]>int(value)):
-                   task["Index"]-=1
-    with open(fileName,"w") as f:
-         json.dump(updated,f,indent=4)
-         print("deleted")
+     def mark_completed(self,value):#marks task as completed
+          current_time = time.strftime("%Y-%m-%d %I:%M %p",time.localtime())
+          with open(self.FileName,"r") as f:
+               temp=json.load(f)
+          for task in temp:
+               if(task["Index"]==int(value)):
+                    task["mark"]=True
+                    task["time_completed"]=current_time
+                    break
+          with open(self.FileName,"w") as f:
+               json.dump(temp,f,indent=4)
+               print("Marked")
+     def deletion(self,value):
+          updated=[]
+          with open(self.FileName,"r") as f:
+               temp=json.load(f)
+          for task in temp:
+               if task["Index"]!=int(value):
+                     updated.append(task)
+               if(task["Index"]>int(value)):
+                    task["Index"]-=1
+          with open(self.FileName,"w") as f:
+               json.dump(updated,f,indent=4)
+               print("deleted")
     
          
              
-
+task = Task(file)
 exit=True
 #main part
 while(exit):              
@@ -97,30 +101,30 @@ while(exit):
 
      if(uinput==1):
           taskw=str(input("enter task to add: "))
-          add(file,taskw)
+          task.add(taskw)
           print("Task added")
           time.sleep(1.5) 
           clear_terminal()
      elif(uinput==2):
           print("choose which one to delete:")
-          print(allDataStr(file))
+          print(task.allDataStr())
           print("")
           delete=input("write: ")
-          deletion(file,delete)
+          task.deletion(delete)
           time.sleep(1.5)
           clear_terminal()
 
      elif(uinput==3):    
           print("choose which one is completed:")
-          print(allDataStr(file))
+          print(task.allDataStr())
           print("")
           completed=input("write: ")
-          mark_completed(file,completed)   
+          task.mark_completed(completed)   
           time.sleep(1.5) 
           clear_terminal()  
      elif(uinput==4):
           print("Tasks:")
-          print(allDataStr(file))
+          print(task.allDataStr())
      elif(uinput==5):
           exit=False
           print("exiting..",end="")
