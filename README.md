@@ -83,6 +83,17 @@ Improved error handling for smoother user experience.
 
 Optimized allDataStr() output formatting for better readability.
 
+✨ Update - Object-Oriented Version (2025-05-29)
+Introduced a Task class to organize task-related operations (add, delete, mark complete, display).
+
+Refactored procedural code into clean, maintainable class methods.
+
+Preserved structured JSON storage (tasks.json) for persistent data.
+
+Simplified main loop logic and error handling with class abstraction.
+
+Improved scalability of the app by adopting object-oriented programming.
+
 📝 Example JSON Structure
 [
   {
